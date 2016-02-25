@@ -8,7 +8,9 @@ class View
     public function assign($key, $value){
         $this->data[$key]=$value;
     }
-
+    public function __set($k, $v){
+        $this->data[$k]=$v;
+    }
 
     public function render($template)
     {
@@ -16,7 +18,7 @@ class View
             $$key = $val;
         }
         ob_start();
-        include $_SERVER["DOCUMENT_ROOT"]."views".$template;
+        include $_SERVER["DOCUMENT_ROOT"]."/views/".$template;
         $content = ob_get_contents();
         ob_end_clean();
         return $content;

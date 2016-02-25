@@ -1,3 +1,4 @@
+AddDefaultCharset utf-8
 RewriteEngine On
 
 # Some hosts may require you to use the `RewriteBase` directive.
@@ -6,6 +7,6 @@ RewriteEngine On
 #
 #RewriteBase /
 
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php

@@ -23,13 +23,16 @@ class News
 
     public static function getAll(){
         $db = Db::getConnection();
-        $result = $db->query('SELECT id, title, article, date FROM news ORDER BY date DESC LIMIT 10');
+        $result = $db->query('SELECT id, title, article, image, date, news_category_id, status FROM news ORDER BY date DESC LIMIT 10');
         $i = 0;
         while($row=$result->fetch()){
             $newsItems[$i]["id"] = $row["id"];
             $newsItems[$i]["title"] = $row["title"];
             $newsItems[$i]["article"] = $row["article"];
             $newsItems[$i]["date"] = $row["date"];
+            $newsItems[$i]["image"] = $row["image"];
+            $newsItems[$i]["news_category_id"] = $row["news_category_id"];
+            $newsItems[$i]["status"] = $row["status"];
             $i++;
         }
 

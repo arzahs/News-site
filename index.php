@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 //подулючаем важные файлы
 require_once("components/Router.php");
 require_once("components/Db.php");
-
+require_once("components/View.php");
 //подключение к БД
 
 //маршрутизация

@@ -8,9 +8,10 @@ class NewsController
     public function actionList(){
        // $newsItems = array();
         $newsItems = News::getAll();
-        echo "<pre>";
-        print_r($newsItems);
-        echo "</pre>";
+        $view = new View();
+        $view->assign("items", $newsItems);
+        $view->display("news/newslist.php");
+
         return true;
     }
 
