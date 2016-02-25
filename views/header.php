@@ -5,7 +5,7 @@
   <title>Новостной сайт</title>
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-  <link rel="stylesheet" href="../static/css/app.css">
+  <link rel="stylesheet" href="<?php echo "http://".$_SERVER["HTTP_HOST"]."/static/css/app.css" ?>">
 </head>
 <body>
   <header>
