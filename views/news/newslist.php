@@ -1,6 +1,6 @@
   <?php require $_SERVER["DOCUMENT_ROOT"]."/views/header.php" ?>
     <div>
-      <h5 class="center-align">Последние новости<?php  echo $page; ?></h5>
+      <h5 class="center-align">Последние новости</h5>
     </div>
     <div class="row">
 
@@ -44,17 +44,17 @@
     </div>
     <?php endforeach; ?>
     </div>
+        <?php if($numberPages != 0): ?>
       <div class="container">
         <ul class="pagination">
           <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-          <li class="active"><a href="#!">1</a></li>
-          <li class="waves-effect"><a href="#!">2</a></li>
-          <li class="waves-effect"><a href="#!">3</a></li>
-          <li class="waves-effect"><a href="#!">4</a></li>
-          <li class="waves-effect"><a href="#!">5</a></li>
+            <?php $thisPage = 0; while($thisPage++<$numberPages): ?>
+          <li class="<?php if($thisPage == $page){echo "active";} else{ echo "waves-effect"; }?>"><a href="<?php echo '/page-'.$thisPage ?>"><?=$thisPage?></a></li>
+                <?php endwhile ?>
           <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
         </ul>
       </div>
+        <?php endif ?>
       </div>
 
 

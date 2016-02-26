@@ -45,6 +45,18 @@ class News
 
     }
 
+    public static function getCountNews($idcategory = 0)
+    {
+        $db = Db::getConnection();
+        if ($idcategory == 0) {
+            $result = $db->query("SELECT COUNT(*) FROM news");
+        }else{
+            $result = $db->query("SELECT COUNT(*) FROM news WHERE category_news_id=".$idcategory);
+        }
+        $count = $result->fetch(PDO::FETCH_NUM);
+        return intval($count[0]);
+    }
+
     public static function getAll($page = 1){
         $page = intval($page);
         $offset = ($page-1)*self::SHOW_BY_DEFAULT;

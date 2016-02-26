@@ -8,11 +8,16 @@ class NewsController
     public function actionList($page = 1){
         $newsItems = News::getAll($page);
         $categoryItems = Category::getAll();
+        $numberItems = News::SHOW_BY_DEFAULT;
+        $countItems = News::getCountNews();
+        $numberPages = ceil($countItems/intval($numberItems)); //округляю колличество страниц
         $view = new View();
         $view->assign("page", $page);
         $view->assign("items", $newsItems);
         $view->assign("categories", $categoryItems);
         $view->assign("activeCategory", 0);
+        //$view->assign("page", 0);
+        $view->assign("numberPages", $numberPages);
         $view->display("news/newslist.php");
         return true;
     }
