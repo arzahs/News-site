@@ -22,13 +22,15 @@ class News
 
     }
 
-    public static function getAllByCategory($numberCategory)
-    {
+    public static function getAllByCategory($numberCategory, $page = 1)
+    {   $page = intval($page);
         $numberCategory = intval($numberCategory);
 
         if ($numberCategory) {
             $db = Db::getConnection();
-            $result = $db->query("SELECT * FROM news WHERE news_category_id=" . $numberCategory);
+            $offset = ($page-1)*self::SHOW_BY_DEFAULT;
+            $result = $db->query("SELECT * FROM news
+            WHERE news_category_id=" . $numberCategory.' ORDER BY date DESC LIMIT '.self::SHOW_BY_DEFAULT.' OFFSET '.$offset);
             $i = 0;
             while ($row = $result->fetch()) {
                 $newsItems[$i]["id"] = $row["id"];
@@ -51,7 +53,8 @@ class News
         if ($idcategory == 0) {
             $result = $db->query("SELECT COUNT(*) FROM news");
         }else{
-            $result = $db->query("SELECT COUNT(*) FROM news WHERE category_news_id=".$idcategory);
+            $result = $db->query("SELECT COUNT(*) FROM news WHERE news_category_id=".$idcategory);
+            var_dump($result);
         }
         $count = $result->fetch(PDO::FETCH_NUM);
         return intval($count[0]);
