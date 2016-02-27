@@ -127,3 +127,10 @@ footer.page-footer .footer-copyright{
   width: 30%;
   float: right;
 }
+h2{
+  font-size: 2.8rem;
+  text-align: center;
+}
+.flow-text p{
+  font-size: 1.5rem;
+}

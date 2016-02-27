@@ -14,7 +14,7 @@ class News
             $result = $db->query("SELECT * FROM news WHERE id=".$id);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $newsItem = $result->fetch();
-            print_r($newsItem);
+            $newsItem["category"] = Category::getById($newsItem["news_category_id"]);
             return $newsItem;
         }
 

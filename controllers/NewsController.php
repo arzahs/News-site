@@ -45,7 +45,9 @@ class NewsController
     }
     public function actionView($numberNews){
         $newsItem = News::getOneById($numberNews);
-        echo "<pre>".$newsItem."</pre>";
+        $view = new View();
+        $view->assign("news", $newsItem);
+        $view->display("news/newsone.php");
         return true;
     }
 }
