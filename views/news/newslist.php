@@ -30,7 +30,7 @@
       <div class="card-content">
         <p><?php
 
-          echo rtrim(substr(strip_tags($item['article']), 0, 225), "!,. ")."[..]";
+          echo rtrim(mb_substr(strip_tags($item['article']), 0, 225, "UTF-8"), "!,. ")."[..]";
 
           ?></p>
       </div>
