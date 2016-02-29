@@ -43,8 +43,10 @@ class UserController
             if($errors == false){
                 $result = User::register($firstName, $lastName, $login, $password, $email);
                 if($result){
-                    $view->assign("register", true);
-                    $view->display("auth/auth.php");
+                    $view2 = new View();
+                    $view2->assign("register", true);
+                    $view2->display("auth/auth.php");
+                    return true;
                 }
             }
         }
@@ -59,7 +61,8 @@ class UserController
     }
 
     public function actionAuth(){
-        echo "Auth";
+        $view = new View();
+        $view->display("auth/auth.php");
         return true;
     }
 
