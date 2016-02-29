@@ -42,6 +42,10 @@ class UserController
             $view->assign("errors", $errors);
             if($errors == false){
                 $result = User::register($firstName, $lastName, $login, $password, $email);
+                if($result){
+                    $view->assign("register", true);
+                    $view->display("auth/auth.php");
+                }
             }
         }
 
