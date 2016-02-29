@@ -61,7 +61,34 @@ class UserController
     }
 
     public function actionAuth(){
+        $login = '';
+        $password = '';
+        $errors = false;
+        if(isset($_POST["action"])){
+            $login = $_POST["login"];
+            $password = $_POST["password"];
+
+
+            if(!User::checkPassword($password)){
+                $errors[] = "Пароль слишком короткий";
+            }
+
+            if(!User::checkName($login)){
+                $errors[] = "Логин слишком короткий";
+            }
+            $userId = User::checkUserExist($login, $password);
+            if($userId==false){
+                $errors[] = "Невереный логин или пароль";
+            }else {
+                User::auth($userId);
+                header("Location: /");
+            }
+        }
+
         $view = new View();
+        $view->assign("login", $login);
+        $view->assign("password", $password);
+        $view->assign("errors", $errors);
         $view->display("auth/auth.php");
         return true;
     }

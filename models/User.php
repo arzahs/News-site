@@ -22,6 +22,11 @@ class User
 
     }
 
+    public static function auth($userId){
+        session_start();
+        $_SESSION["user"] = $userId;
+    }
+
     public static function checkName($name){
         if(strlen($name) >= 2){
             return true;
@@ -64,4 +69,17 @@ class User
         return false;
     }
 
+    public static function checkUserExist($login, $password){
+        $db = Db::getConnection();
+        $sql = 'SELECT * FROM user WHERE login=:login AND password=:password';
+        $result = $db->prepare($sql);
+        $result->bindParam(':login', $login, PDO::PARAM_STR);
+        $result->bindParam(':password', $password, PDO::PARAM_STR);
+        $result->execute();
+        $user = $result->fetch();
+        if($user)
+            return $user["id"];
+        return false;
+
+    }
 }
