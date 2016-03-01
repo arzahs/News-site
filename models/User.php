@@ -23,8 +23,12 @@ class User
     }
 
     public static function auth($userId){
-        session_start();
         $_SESSION["user"] = $userId;
+    }
+
+    public static function logout(){
+        unset($_SESSION["user"]);
+        header("Location: /");
     }
 
     public static function checkName($name){
@@ -81,5 +85,34 @@ class User
             return $user["id"];
         return false;
 
+    }
+
+    public static function checkUserLogged(){
+
+        if(isset($_SESSION["user"])){
+            return $_SESSION["user"];
+        }
+        header("Location: /auth/");
+    }
+
+    public static function isAdmin($idUser){
+        $db = Db::getConnection();
+        $sql = 'SELECT is_admin FROM user WHERE id=:id';
+        $result = $db->prepare($sql);
+        $result->bindParam(":id", $idUser, PDO::PARAM_INT);
+        $result->execute();
+        $isAdmin = $result->fetch();
+        if($isAdmin == 1){
+            return true;
+        }
+            return false;
+
+    }
+
+    public static function isGuest(){
+        if (isset($_SESSION["user"])){
+            return false;
+        }
+        return true;
     }
 }

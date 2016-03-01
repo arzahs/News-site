@@ -52,13 +52,24 @@ class NewsController
     }
 
     public function actionAdd(){
-        //проверка на аутенфикацю пользователя
+        $article = "";
+        $title = "";
+        $imgPath = "";
+        $categoryNumber = 1;
+        $errors = false;
+        //проверка на аутенфикацию пользователя
 
         //проверка админ ли пользователь
-
+        //отправляем страницу
+        $categoryItems = Category::getAll();
+        $view = new View();
+        $view->assign("categories", $categoryItems);
+        $view->display("news/newsadd.php");
             //считываем данные из формы
+
             //валидация данных
                 //отправляем данные в базу данных
                 //переправляем пользователя на главную страницу
+        return true;
     }
 }

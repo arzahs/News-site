@@ -93,5 +93,9 @@ class UserController
         return true;
     }
 
+    public function actionLogout(){
+        User::logout();
+    }
+
 
 }
