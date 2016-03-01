@@ -2,8 +2,10 @@
 
 
 include_once $_SERVER["DOCUMENT_ROOT"]."/models/News.php";
+include_once $_SERVER["DOCUMENT_ROOT"]."/models/User.php";
 class NewsController
 {
+
 
     public function actionList($page = 1){
         $newsItems = News::getAll($page);
@@ -13,9 +15,11 @@ class NewsController
         $numberItems = News::SHOW_BY_DEFAULT;
         $countItems = News::getCountNews();
         $numberPages = ceil($countItems/intval($numberItems)); //округляю колличество страниц
+        //получаю данные про пользователя
 
         //отправляю данные на вьюху
         $view = new View();
+        View::userControl($view);
         $view->assign("page", $page);
         $view->assign("items", $newsItems);
         $view->assign("categories", $categoryItems);
@@ -34,6 +38,7 @@ class NewsController
         $numberPages = ceil($countItems/intval($numberItems));
 
         $view = new View();
+        View::userControl($view);
         $view->assign("page", $page);
         $view->assign("items", $newsItems);
         $view->assign("categories", $categoryItems);
@@ -47,6 +52,7 @@ class NewsController
         $newsItem = News::getOneById($numberNews);
         $view = new View();
         $view->assign("news", $newsItem);
+        View::userControl($view);
         $view->display("news/newsone.php");
         return true;
     }
@@ -62,7 +68,9 @@ class NewsController
         //проверка админ ли пользователь
         //отправляем страницу
         $categoryItems = Category::getAll();
+
         $view = new View();
+        View::userControl($view);
         $view->assign("categories", $categoryItems);
         $view->display("news/newsadd.php");
             //считываем данные из формы

@@ -11,11 +11,22 @@
   <header>
     <nav>
     <div class="nav-wrapper container">
-      <a href="#" class="brand-logo">Новостной сайт</a>
+      <a href="/" class="brand-logo">Новостной сайт</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li class="active"><a href="#" >Новости</a></li>
+        <li><a href="/" >Новости</a></li>
+        <?php if(isset($isAdmin) && $isAdmin == true): ?>
+          <li><a href="/news/add">Добавить новость</a></li>
+        <?php endif; ?>
+
+        <?php if(isset($isLogged) && $isLogged == true): ?>
         <li><a href="#">Документация</a></li>
-        <li><a href="#">Войти</a></li>
+          <li><a href="/auth/logout">Выйти</a></li>
+        <?php endif; ?>
+        <?php if(!isset($isLogged) || $isLogged == false): ?>
+        <li><a href="/auth">Войти</a></li>
+        <?php endif; ?>
+
+
       </ul>
     </div>
   </nav>

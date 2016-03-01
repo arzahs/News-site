@@ -92,7 +92,7 @@ class User
         if(isset($_SESSION["user"])){
             return $_SESSION["user"];
         }
-        header("Location: /auth/");
+        return false;
     }
 
     public static function isAdmin($idUser){
@@ -101,8 +101,7 @@ class User
         $result = $db->prepare($sql);
         $result->bindParam(":id", $idUser, PDO::PARAM_INT);
         $result->execute();
-        $isAdmin = $result->fetch();
-        if($isAdmin == 1){
+        if($result->fetchColumn()){
             return true;
         }
             return false;

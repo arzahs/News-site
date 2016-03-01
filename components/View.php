@@ -28,6 +28,19 @@ class View
         echo $this->render($template);
     }
 
+    public static function userControl($view){
+        $isLogged = false;
+        $isAdmin = false;
+        $userId = User::checkUserLogged();
+        if($userId != false){
+            $isLogged=true;
+            $isAdmin = User::isAdmin($userId);
+        }
+        $view->assign("userId", $userId);
+        $view->assign("isLogged", $isLogged);
+        $view->assign("isAdmin", $isAdmin);
+        return true;
+    }
 
 
 }
