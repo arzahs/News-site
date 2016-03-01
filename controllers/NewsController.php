@@ -64,20 +64,44 @@ class NewsController
         $categoryNumber = 1;
         $errors = false;
         //проверка на аутенфикацию пользователя
-
-        //проверка админ ли пользователь
-        //отправляем страницу
+        $userId = User::checkUserLogged();
+        $isAdmin = User::isAdmin($userId);
+        if($isAdmin == false) {
+            header("Location: /");
+        }
         $categoryItems = Category::getAll();
+        if(isset($_POST["action"])){
+            $article = $_POST["article"];
+            $title = $_POST["title"];
+            $imgPath = "";
+            $categoryNumber = $_POST["category"];
 
+            //валидация данных
+            //отправляем данные в базу данных
+
+            if($errors==false){
+                $result = News::addNews($title, $article, $imgPath,$categoryNumber, $userId);
+                if($result!=0){
+                    if(is_uploaded_file($_FILES["image"])) {
+                        move_uploaded_file($_FILES["image"], $_SERVER['DOCUMENT_ROOT'] . "/static/img/{$result}.jpg");
+                        header("Location: /");
+                    }
+
+                }else{
+                    $errors[] = "Ошибка записи в Базу Данных";
+                }
+            }
+
+            //переправляем пользователя на главную страницу
+
+        }
         $view = new View();
         View::userControl($view);
+        $view->assign("errors", $errors);
         $view->assign("categories", $categoryItems);
         $view->display("news/newsadd.php");
             //считываем данные из формы
 
-            //валидация данных
-                //отправляем данные в базу данных
-                //переправляем пользователя на главную страницу
         return true;
     }
 }

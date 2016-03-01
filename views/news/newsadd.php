@@ -1,7 +1,10 @@
 <?php require $_SERVER["DOCUMENT_ROOT"]."/views/header.php"; ?>
 <div class="col s12">
     <h2 class="center-align">Добавить новость</h2>
-    <form class="add-news" action="">
+    <?php if(isset($errors) && $errors != false) foreach($errors as $error): ?>
+        <li><?=$error ?></li>
+    <?php endforeach; ?>
+    <form class="add-news" method="post" action="/news/add" encrypt="multipart/form-data">
         <div class="input-field col s12">
             <input id="title_news" type="text" class="validate" name="title">
             <label for="title_news">Название новости</label>
@@ -21,10 +24,10 @@
         <div class="file-field input-field">
             <div class="btn">
                 <span>Добавить фото</span>
-                <input type="file">
+                <input type="file" name="image">
             </div>
             <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" name="path">
+                <input class="file-path validate" type="text" >
             </div>
         </div>
 

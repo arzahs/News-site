@@ -80,4 +80,20 @@ class News
 
         return $newsItems;
     }
+
+    public static function addNews($title, $article, $path, $category, $idAuthor){
+        $db = Db::getConnection();
+        $sql = "INSERT INTO news(title, article, image, news_category_id, user_id)
+          VALUES (:title, :article, :path, :category, :user_id)";
+        $result=$db->prepare($sql);
+        $result->bindParam(":title", $title, PDO::PARAM_STR);
+        $result->bindParam(":article", $article, PDO::PARAM_STR);
+        $result->bindParam(":path", $path, PDO::PARAM_STR);
+        $result->bindParam(":category", $category, PDO::PARAM_INT);
+        $result->bindParam(":user_id", $idAuthor, PDO::PARAM_INT);
+        if($result->execute()){
+            return $db->lastInsertId();
+        }
+        return 0;
+    }
 }
