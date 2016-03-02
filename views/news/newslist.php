@@ -24,7 +24,7 @@
 
      <div class="card">
       <div class="card-img">
-          <img src="<?php echo "http://".$_SERVER["HTTP_HOST"]."/static/img/".$item['image'] ?>">
+          <img src="<?php echo "http://".$_SERVER["HTTP_HOST"]."/static/img/".$item['id'].".jpg"?>">
       </div>
       <span class="card-title"><?php echo $item['title']; ?></span>
       <div class="card-content">

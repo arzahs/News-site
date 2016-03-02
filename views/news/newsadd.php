@@ -4,7 +4,7 @@
     <?php if(isset($errors) && $errors != false) foreach($errors as $error): ?>
         <li><?=$error ?></li>
     <?php endforeach; ?>
-    <form class="add-news" method="post" action="/news/add" encrypt="multipart/form-data">
+    <form class="add-news" method="post" action="/news/add" enctype="multipart/form-data">
         <div class="input-field col s12">
             <input id="title_news" type="text" class="validate" name="title">
             <label for="title_news">Название новости</label>

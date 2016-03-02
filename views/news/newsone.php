@@ -6,7 +6,7 @@
             &nbsp;/&nbsp;<a href="<?php echo "/news/category/".$news["news_category_id"];?>" class="category blue-text"><?=$news["category"]; ?></a>
         </div>
         <div class="flow-text">
-            <img src="<?php echo "http://".$_SERVER["HTTP_HOST"]."/static/img/".$news['image'] ?>" class="news-img" alt="">
+            <img src="<?php echo "http://".$_SERVER["HTTP_HOST"]."/static/img/".$news['id'].".jpg" ?>" class="news-img" alt="">
             <p><?=$news["article"]; ?></p>
         </div>
 

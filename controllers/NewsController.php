@@ -82,9 +82,15 @@ class NewsController
             if($errors==false){
                 $result = News::addNews($title, $article, $imgPath,$categoryNumber, $userId);
                 if($result!=0){
-                    if(is_uploaded_file($_FILES["image"])) {
-                        move_uploaded_file($_FILES["image"], $_SERVER['DOCUMENT_ROOT'] . "/static/img/{$result}.jpg");
-                        header("Location: /");
+
+                    if(is_uploaded_file($_FILES["image"]["tmp_name"])) {
+                        $namePathToLoad = $_SERVER['DOCUMENT_ROOT'] . "/static/img/{$result}.jpg";
+                        if(move_uploaded_file($_FILES["image"]["tmp_name"], $namePathToLoad)){
+                            header("Location: /");
+                        }else{
+                            $errors[] = "Ошибка записи файла!";
+                        }
+
                     }
 
                 }else{
