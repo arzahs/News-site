@@ -60,7 +60,6 @@ class NewsController
     public function actionAdd(){
         $article = "";
         $title = "";
-        $imgPath = "";
         $categoryNumber = 1;
         $errors = false;
         //проверка на аутенфикацию пользователя
@@ -73,14 +72,13 @@ class NewsController
         if(isset($_POST["action"])){
             $article = $_POST["article"];
             $title = $_POST["title"];
-            $imgPath = "";
             $categoryNumber = $_POST["category"];
 
             //валидация данных
             //отправляем данные в базу данных
 
             if($errors==false){
-                $result = News::addNews($title, $article, $imgPath,$categoryNumber, $userId);
+                $result = News::addNews($title, $article, $categoryNumber, $userId);
                 if($result!=0){
 
                     if(is_uploaded_file($_FILES["image"]["tmp_name"])) {

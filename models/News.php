@@ -37,7 +37,6 @@ class News
                 $newsItems[$i]["title"] = $row["title"];
                 $newsItems[$i]["article"] = $row["article"];
                 $newsItems[$i]["date"] = $row["date"];
-                $newsItems[$i]["image"] = $row["image"];
                 $newsItems[$i]["category"] = Category::getById($numberCategory);
                 $newsItems[$i]["status"] = $row["status"];
                 $i++;
@@ -64,7 +63,7 @@ class News
         $page = intval($page);
         $offset = ($page-1)*self::SHOW_BY_DEFAULT;
         $db = Db::getConnection();
-        $result = $db->query('SELECT id, title, article, image, date, news_category_id, status
+        $result = $db->query('SELECT id, title, article, date, news_category_id, status
         FROM news ORDER BY date DESC LIMIT '.self::SHOW_BY_DEFAULT.' OFFSET '.$offset);
         $i = 0;
         while($row=$result->fetch()){
@@ -72,7 +71,6 @@ class News
             $newsItems[$i]["title"] = $row["title"];
             $newsItems[$i]["article"] = $row["article"];
             $newsItems[$i]["date"] = $row["date"];
-            $newsItems[$i]["image"] = $row["image"];
             $newsItems[$i]["category"] = Category::getById($row["news_category_id"]);
             $newsItems[$i]["status"] = $row["status"];
             $i++;
@@ -81,14 +79,13 @@ class News
         return $newsItems;
     }
 
-    public static function addNews($title, $article, $path, $category, $idAuthor){
+    public static function addNews($title, $article, $category, $idAuthor){
         $db = Db::getConnection();
-        $sql = "INSERT INTO news(title, article, image, news_category_id, user_id)
+        $sql = "INSERT INTO news(title, article, news_category_id, user_id)
           VALUES (:title, :article, :path, :category, :user_id)";
         $result=$db->prepare($sql);
         $result->bindParam(":title", $title, PDO::PARAM_STR);
         $result->bindParam(":article", $article, PDO::PARAM_STR);
-        $result->bindParam(":path", $path, PDO::PARAM_STR);
         $result->bindParam(":category", $category, PDO::PARAM_INT);
         $result->bindParam(":user_id", $idAuthor, PDO::PARAM_INT);
         if($result->execute()){
