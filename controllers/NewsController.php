@@ -10,13 +10,11 @@ class NewsController
     public function actionList($page = 1){
         $newsItems = News::getAll($page);
         $categoryItems = Category::getAll();
-
         //получаю данные для пагинации
         $numberItems = News::SHOW_BY_DEFAULT;
         $countItems = News::getCountNews();
         $numberPages = ceil($countItems/intval($numberItems)); //округляю колличество страниц
         //получаю данные про пользователя
-
         //отправляю данные на вьюху
         $view = new View();
         View::userControl($view);
@@ -107,5 +105,18 @@ class NewsController
             //считываем данные из формы
 
         return true;
+    }
+
+    public function actionAlljson(){
+        $newsItems = News::getAll(1);
+        echo json_encode($newsItems);
+        return true;
+    }
+
+    public function actionOnejson($numberNews){
+        $newsItem = News::getOneById($numberNews);
+        echo json_encode($newsItem);
+        return true;
+
     }
 }
