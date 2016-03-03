@@ -114,6 +114,10 @@ class NewsController
     }
 
     public function actionOnejson($numberNews){
+        header("HTTP/1.1 200 OK");
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST");
+        header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
         $newsItem = News::getOneById($numberNews);
         echo json_encode($newsItem);
         return true;
