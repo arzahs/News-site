@@ -139,4 +139,15 @@ class NewsController
         $view->display("news/rss.php");
         return true;
     }
+
+    public function actionRsscategory($numberCategory){
+        $newsItems = News::getAllByCategory($numberCategory, 1);
+        $categoryItems = Category::getAll();
+        //print_r($newsItems); die();
+        $view = new View();
+        $view->assign("items", $newsItems);
+        $view->assign("categories", $categoryItems);
+        $view->display("news/rss.php");
+        return true;
+    }
 }
