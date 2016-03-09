@@ -108,6 +108,10 @@ class NewsController
     }
 
     public function actionAlljson(){
+        header("HTTP/1.1 200 OK");
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST");
+        header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
         $newsItems = News::getAll(1);
         echo json_encode($newsItems);
         return true;
@@ -122,5 +126,17 @@ class NewsController
         echo json_encode($newsItem);
         return true;
 
+    }
+
+    public function actionRss(){
+        $newsItems = News::getAll(1);
+        $categoryItems = Category::getAll();
+        //округляю колличество страниц
+
+        $view = new View();
+        $view->assign("items", $newsItems);
+        $view->assign("categories", $categoryItems);
+        $view->display("news/rss.php");
+        return true;
     }
 }

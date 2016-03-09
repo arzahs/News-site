@@ -7,6 +7,7 @@ return array(
     "news/category/([0-9]+)/page-([0-9]+)" => "news/category/$1/$2",
     "news/category/([0-9]+)" => "news/category/$1",
     "news/view/([0-9]+)" => "news/view/$1",
+    "news/rss.xml" => "news/rss",
     "news/add" => "news/add",
     "news/all.json" => "news/alljson",
     "news/news-([0-9]+).json" => "news/onejson/$1",
