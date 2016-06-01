@@ -77,7 +77,7 @@ class NewsController
 
             if($errors==false){
                 $result = News::addNews($title, $article, $categoryNumber, $userId);
-                if($result!=0){
+                if($result != 0){
 
                     if(is_uploaded_file($_FILES["image"]["tmp_name"])) {
                         $namePathToLoad = $_SERVER['DOCUMENT_ROOT'] . "/static/img/{$result}.jpg";
@@ -93,8 +93,6 @@ class NewsController
                     $errors[] = "Ошибка записи в Базу Данных";
                 }
             }
-
-            //переправляем пользователя на главную страницу
 
         }
         $view = new View();
@@ -131,8 +129,6 @@ class NewsController
     public function actionRss(){
         $newsItems = News::getAll(1);
         $categoryItems = Category::getAll();
-        //округляю колличество страниц
-
         $view = new View();
         $view->assign("items", $newsItems);
         $view->assign("categories", $categoryItems);
@@ -143,7 +139,6 @@ class NewsController
     public function actionRsscategory($numberCategory){
         $newsItems = News::getAllByCategory($numberCategory, 1);
         $categoryItems = Category::getAll();
-        //print_r($newsItems); die();
         $view = new View();
         $view->assign("items", $newsItems);
         $view->assign("categories", $categoryItems);

@@ -3,6 +3,7 @@
 return array(
     "auth/logout" => "user/logout",
     "auth/register" => "user/register",
+    "docs" => "page/one/1",
     "auth" => "user/auth",
     "news/category/([0-9]+)/page-([0-9]+)" => "news/category/$1/$2",
     "news/category/([0-9]+)" => "news/category/$1",

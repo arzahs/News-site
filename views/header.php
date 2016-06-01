@@ -19,7 +19,7 @@
         <?php endif; ?>
 
         <?php if(isset($isLogged) && $isLogged == true): ?>
-        <li><a href="#">Документация</a></li>
+        <li><a href="/docs">Документация</a></li>
           <li><a href="/auth/logout">Выйти</a></li>
         <?php endif; ?>
         <?php if(!isset($isLogged) || $isLogged == false): ?>
