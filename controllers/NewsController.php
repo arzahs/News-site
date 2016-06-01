@@ -68,8 +68,17 @@ class NewsController
         }
         $categoryItems = Category::getAll();
         if(isset($_POST["action"])){
+
             $article = $_POST["article"];
+            if(!isset($article) || News::articleValid($article) == false){
+                $errors[] = "Ошибка ввода записи";
+            }
             $title = $_POST["title"];
+
+            if(!isset($title) || News::titleValid($title) == false){
+                $errors[] = "Ошибка ввода названия";
+            }
+
             $categoryNumber = $_POST["category"];
 
             //валидация данных

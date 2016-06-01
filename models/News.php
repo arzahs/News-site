@@ -82,7 +82,7 @@ class News
     public static function addNews($title, $article, $category, $idAuthor){
         $db = Db::getConnection();
         $sql = "INSERT INTO news(title, article, news_category_id, user_id)
-          VALUES (:title, :article, :path, :category, :user_id)";
+          VALUES (:title, :article, :category, :user_id)";
         $result=$db->prepare($sql);
         $result->bindParam(":title", $title, PDO::PARAM_STR);
         $result->bindParam(":article", $article, PDO::PARAM_STR);
@@ -92,5 +92,19 @@ class News
             return $db->lastInsertId();
         }
         return 0;
+    }
+
+    public static function articleValid($text){
+        if($text != '' and $text != false){
+            return true;
+        }
+        return false;
+    }
+
+    public static function titleValid($text){
+        if($text != '' and $text != false){
+            return true;
+        }
+        return false;
     }
 }
